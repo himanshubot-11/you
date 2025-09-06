@@ -3,85 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FOR YOU</title>
+  <title>For You ❤️</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div class="container">
+    <h1>For You ❤️</h1>
+    <select id="choice">
+      <option value="">-- Choose an option --</option>
+      <option value="sorry">Sorry 😔</option>
+      <option value="love">Love 💕</option>
+      <option value="kiss">Kiss 😘</option>
+      <option value="hug">Hug 🤗</option>
+    </select>
+    <button onclick="showMessage()">Show</button>
+    <div id="output"></div>
+  </div>
 
-  <!-- Floating hearts background -->
-  <div class="hearts"></div>
-
-  <h1>💞 Emoji Love Generator 💞</h1>
-  <p>Select an option and click Generate:</p>
-
-  <select id="choice">
-    <option value="sorry">Sorry</option>
-    <option value="love">Love</option>
-    <option value="kiss">Kiss</option>
-    <option value="hug">Hug</option>
-  </select>
-  <button onclick="generateFile()">Generate</button>
-
-  <!-- Hug output will be shown here -->
-  <div id="output"></div>
-
-  <script>
-    const heartEmojis = ['❤️','💛','💚','💙','💜','🖤','🤍','💖','💗','💓','💞','💕','💘','💝','💟','❣️'];
-    const kissEmojis = ['💋','👩‍❤️‍💋‍👨','👨‍❤️‍💋‍👨','👩‍❤️‍💋‍👩','😘','😗','😚','😙','💏'];
-    const hugEmojis = ['🤗','🫂'];
-
-    function getRandomItem(arr) {
-      return arr[Math.floor(Math.random() * arr.length)];
-    }
-
-    function generateFile() {
-      const choice = document.getElementById('choice').value;
-      let text = '';
-      const outputDiv = document.getElementById("output");
-      outputDiv.innerHTML = ""; // clear old output
-
-      if (choice === "hug") {
-        // Just display on page
-        for (let i = 0; i < 100; i++) {
-          text += `Big Hug ${getRandomItem(hugEmojis)} ${getRandomItem(heartEmojis)}<br>`;
-        }
-        outputDiv.innerHTML = text;
-        return; // stop here (no download)
-      }
-
-      // Other options: create file
-      for (let i = 0; i < 1000; i++) {
-        if (choice === 'sorry') {
-          text += `Sorry ${getRandomItem(heartEmojis)}\n`;
-        } else if (choice === 'love') {
-          text += `I love you ${getRandomItem(heartEmojis)} ${getRandomItem(kissEmojis)}\n`;
-        } else if (choice === 'kiss') {
-          text += `${getRandomItem(kissEmojis)}\n`;
-        }
-      }
-
-      const blob = new Blob([text], { type: "text/plain" });
-      const link = document.createElement("a");
-      link.href = URL.createObjectURL(blob);
-      link.download = `${choice}_emojis.txt`;
-      link.click();
-    }
-
-    // Floating hearts
-    const heartsContainer = document.querySelector(".hearts");
-    setInterval(() => {
-      const heart = document.createElement("div");
-      heart.classList.add("heart");
-      heart.innerText = getRandomItem(heartEmojis);
-      heart.style.left = Math.random() * 100 + "vw";
-      heart.style.animationDuration = 3 + Math.random() * 4 + "s";
-      heartsContainer.appendChild(heart);
-
-      setTimeout(() => {
-        heart.remove();
-      }, 7000);
-    }, 500);
-  </script>
-
+  <script src="script.js"></script>
 </body>
 </html>
