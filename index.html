@@ -7,22 +7,32 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Floating emojis background (generated via JS) -->
-  <div class="floating-background" id="floating-bg"></div>
+  <!-- Floating emoji background -->
+  <div class="floating-background">
+    <span>💖</span><span>💕</span><span>💘</span><span>❤️</span>
+    <span>💞</span><span>💓</span><span>💗</span><span>❣️</span>
+    <span>💋</span><span>😘</span><span>😍</span><span>🥰</span>
+  </div>
 
-  <!-- Main dashboard -->
+  <!-- Dashboard -->
   <div class="container">
-    <h1>For You ❤️</h1>
+    <h1>For You ❤️
+      <div class="glitter-orbit">
+        <span>✨</span><span>✨</span><span>✨</span><span>✨</span>
+        <span>✨</span><span>✨</span><span>✨</span><span>✨</span>
+      </div>
+    </h1>
+
     <div class="controls">
-      <select id="choice">
-        <option value="">-- Choose an option --</option>
-        <option value="sorry">Sorry 😔</option>
-        <option value="love">Love 💕</option>
-        <option value="kiss">Kiss 😘</option>
+      <select id="option">
+        <option value="sorry">Sorry 💔</option>
+        <option value="love">Love ❤️</option>
+        <option value="kiss">Kiss 💋</option>
         <option value="hug">Hug 🤗</option>
       </select>
-      <button onclick="showMessage()">Generate</button>
+      <button onclick="generateMessage()">Generate</button>
     </div>
+
     <div id="output"></div>
   </div>
 
