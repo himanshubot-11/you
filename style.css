@@ -1,7 +1,12 @@
+/* ============================= */
+/* Body with animated background */
+/* ============================= */
 body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
-  background: linear-gradient(135deg, #ff6fb5, #ff3e9e, #ff1e80);
+  background: linear-gradient(270deg, #ff6fb5, #ff3e9e, #ff1e80, #ff66cc, #ff99cc);
+  background-size: 1000% 1000%;
+  animation: gradientShift 20s ease infinite;
   color: #fff;
   min-height: 100vh;
   display: flex;
@@ -11,7 +16,14 @@ body {
   position: relative;
 }
 
-/* Floating emojis */
+/* Gradient animation */
+@keyframes gradientShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Floating emoji background */
 .floating-background {
   position: absolute;
   top: 0; left: 0;
@@ -21,27 +33,27 @@ body {
 }
 .floating-background span {
   position: absolute;
-  font-size: 26px;
-  animation: float 18s linear infinite;
-  opacity: 0.8;
+  font-size: 22px;
+  opacity: 0;
+  animation: float 18s linear infinite, fadePulse 6s ease-in-out infinite, drift 5s ease-in-out infinite;
 }
-.floating-background span:nth-child(1){ left: 10%; animation-delay: 0s;}
-.floating-background span:nth-child(2){ left: 20%; animation-delay: 3s;}
-.floating-background span:nth-child(3){ left: 35%; animation-delay: 6s;}
-.floating-background span:nth-child(4){ left: 50%; animation-delay: 2s;}
-.floating-background span:nth-child(5){ left: 65%; animation-delay: 5s;}
-.floating-background span:nth-child(6){ left: 80%; animation-delay: 7s;}
-.floating-background span:nth-child(7){ left: 90%; animation-delay: 1s;}
-.floating-background span:nth-child(8){ left: 25%; animation-delay: 9s;}
-.floating-background span:nth-child(9){ left: 70%; animation-delay: 4s;}
-
 @keyframes float {
-  0% { top: 100%; transform: translateY(0) scale(0.8) rotate(0deg); }
-  50% { transform: translateY(-50vh) scale(1) rotate(180deg); }
-  100% { top: -10%; transform: translateY(-100vh) scale(0.8) rotate(360deg); }
+  0%   { transform: translateY(100vh) scale(0.8) rotate(0deg); }
+  50%  { transform: translateY(50vh) scale(1.2) rotate(180deg); }
+  100% { transform: translateY(-10vh) scale(0.8) rotate(360deg); }
+}
+@keyframes fadePulse {
+  0%, 100% { opacity: 0; }
+  30%, 70% { opacity: 0.9; }
+}
+@keyframes drift {
+  0%, 100% { transform: translateX(0); }
+  25%      { transform: translateX(-15px); }
+  50%      { transform: translateX(10px); }
+  75%      { transform: translateX(-5px); }
 }
 
-/* Dashboard */
+/* Container */
 .container {
   background: rgba(255, 255, 255, 0.15);
   padding: 40px 30px;
@@ -54,12 +66,61 @@ body {
   backdrop-filter: blur(12px);
 }
 
-/* Title */
+/* Title with heartbeat + orbiting glitter */
 h1 {
-  font-size: 2.5em;
+  font-size: 2.8em;
   margin-bottom: 25px;
   color: #ffe6f7;
-  text-shadow: 2px 2px 6px rgba(255, 0, 120, 0.7);
+  text-shadow: 0 0 10px rgba(255, 0, 120, 0.7), 0 0 20px rgba(255, 50, 150, 0.6);
+  animation: heartbeat 2s infinite ease-in-out;
+  position: relative;
+  display: inline-block;
+  z-index: 2;
+}
+@keyframes heartbeat {
+  0%   { transform: scale(1); }
+  25%  { transform: scale(1.05); }
+  50%  { transform: scale(1.1); }
+  75%  { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+/* Orbiting glitter */
+.glitter-orbit {
+  position: absolute;
+  top: 50%; left: 50%;
+  pointer-events: none;
+  z-index: 1;
+}
+.glitter-orbit span {
+  position: absolute;
+  font-size: 1.2em;
+  color: #fff8e1;
+  text-shadow: 0 0 8px #ffd700, 0 0 15px #ffcc00;
+}
+
+/* Different orbits */
+.glitter-orbit span:nth-child(1) { animation: orbit1 10s linear infinite, twinkle 2.5s infinite; }
+.glitter-orbit span:nth-child(2) { animation: orbit2 14s linear infinite, twinkle 3s infinite; }
+.glitter-orbit span:nth-child(3) { animation: orbit3 18s linear infinite, twinkle 4s infinite; }
+.glitter-orbit span:nth-child(4) { animation: orbit4 12s linear infinite, twinkle 2.8s infinite; }
+.glitter-orbit span:nth-child(5) { animation: orbit5 20s linear infinite, twinkle 5s infinite; }
+.glitter-orbit span:nth-child(6) { animation: orbit6 16s linear infinite, twinkle 3.5s infinite; }
+.glitter-orbit span:nth-child(7) { animation: orbit7 22s linear infinite, twinkle 4.5s infinite; }
+.glitter-orbit span:nth-child(8) { animation: orbit8 15s linear infinite, twinkle 3s infinite; }
+
+@keyframes orbit1 { from { transform: rotate(0deg) translateX(70px); } to { transform: rotate(360deg) translateX(70px); } }
+@keyframes orbit2 { from { transform: rotate(0deg) translateX(90px); } to { transform: rotate(360deg) translateX(90px); } }
+@keyframes orbit3 { from { transform: rotate(0deg) translateX(110px); } to { transform: rotate(360deg) translateX(110px); } }
+@keyframes orbit4 { from { transform: rotate(0deg) translateX(80px); } to { transform: rotate(360deg) translateX(80px); } }
+@keyframes orbit5 { from { transform: rotate(0deg) translateX(130px); } to { transform: rotate(360deg) translateX(130px); } }
+@keyframes orbit6 { from { transform: rotate(0deg) translateX(100px); } to { transform: rotate(360deg) translateX(100px); } }
+@keyframes orbit7 { from { transform: rotate(0deg) translateX(140px); } to { transform: rotate(360deg) translateX(140px); } }
+@keyframes orbit8 { from { transform: rotate(0deg) translateX(95px); } to { transform: rotate(360deg) translateX(95px); } }
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.3; transform: scale(0.8); }
+  50%      { opacity: 1; transform: scale(1.3); }
 }
 
 /* Controls */
@@ -69,8 +130,6 @@ h1 {
   gap: 15px;
   margin-bottom: 20px;
 }
-
-/* Dropdown */
 select {
   font-size: 18px;
   padding: 12px 18px;
@@ -80,17 +139,8 @@ select {
   color: #ff4da6;
   font-weight: bold;
   cursor: pointer;
-  transition: transform 0.3s ease;
 }
 select:hover { transform: scale(1.05); }
-
-select option {
-  background: #ffe6f2;
-  color: #d63384;
-  font-weight: bold;
-}
-
-/* Button */
 button {
   padding: 12px 22px;
   border: none;
@@ -102,10 +152,7 @@ button {
   cursor: pointer;
   transition: transform 0.3s, background 0.3s;
 }
-button:hover {
-  background: #ff1e80;
-  transform: scale(1.1);
-}
+button:hover { background: #ff1e80; transform: scale(1.1); }
 
 /* Output */
 #output {
@@ -119,20 +166,4 @@ button:hover {
   max-height: 400px;
   overflow-y: auto;
   line-height: 1.6;
-  animation: fadeInBox 0.8s ease;
-}
-@keyframes fadeInBox {
-  from { opacity: 0; transform: scale(0.9); }
-  to { opacity: 1; transform: scale(1); }
-}
-
-/* Hug animation */
-.hug-line {
-  display: block;
-  opacity: 0;
-  animation: fadeInLine 0.6s forwards;
-}
-@keyframes fadeInLine {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
 }
