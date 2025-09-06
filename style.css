@@ -1,9 +1,8 @@
 body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
-  background: linear-gradient(135deg, #ff99cc, #ff66b2, #ff4da6);
+  background: linear-gradient(135deg, #ff6fb5, #ff3e9e, #ff1e80);
   color: #fff;
-  text-align: center;
   min-height: 100vh;
   display: flex;
   justify-content: center;
@@ -12,35 +11,29 @@ body {
   position: relative;
 }
 
-/* Floating background elements */
+/* Floating emojis */
 .floating-background {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
   overflow: hidden;
   z-index: 0;
 }
-
 .floating-background span {
   position: absolute;
-  display: inline-block;
-  font-size: 24px;
-  animation: float 15s linear infinite;
+  font-size: 26px;
+  animation: float 18s linear infinite;
   opacity: 0.8;
 }
-
-/* Random positions and delays */
-.floating-background span:nth-child(1) { left: 10%; animation-delay: 0s; }
-.floating-background span:nth-child(2) { left: 25%; animation-delay: 3s; }
-.floating-background span:nth-child(3) { left: 40%; animation-delay: 6s; }
-.floating-background span:nth-child(4) { left: 55%; animation-delay: 2s; }
-.floating-background span:nth-child(5) { left: 70%; animation-delay: 5s; }
-.floating-background span:nth-child(6) { left: 85%; animation-delay: 1s; }
-.floating-background span:nth-child(7) { left: 15%; animation-delay: 7s; }
-.floating-background span:nth-child(8) { left: 60%; animation-delay: 9s; }
-.floating-background span:nth-child(9) { left: 80%; animation-delay: 4s; }
+.floating-background span:nth-child(1){ left: 10%; animation-delay: 0s;}
+.floating-background span:nth-child(2){ left: 20%; animation-delay: 3s;}
+.floating-background span:nth-child(3){ left: 35%; animation-delay: 6s;}
+.floating-background span:nth-child(4){ left: 50%; animation-delay: 2s;}
+.floating-background span:nth-child(5){ left: 65%; animation-delay: 5s;}
+.floating-background span:nth-child(6){ left: 80%; animation-delay: 7s;}
+.floating-background span:nth-child(7){ left: 90%; animation-delay: 1s;}
+.floating-background span:nth-child(8){ left: 25%; animation-delay: 9s;}
+.floating-background span:nth-child(9){ left: 70%; animation-delay: 4s;}
 
 @keyframes float {
   0% { top: 100%; transform: translateY(0) scale(0.8) rotate(0deg); }
@@ -48,41 +41,48 @@ body {
   100% { top: -10%; transform: translateY(-100vh) scale(0.8) rotate(360deg); }
 }
 
-/* Container */
+/* Dashboard */
 .container {
   background: rgba(255, 255, 255, 0.15);
-  padding: 30px;
+  padding: 40px 30px;
   border-radius: 20px;
-  box-shadow: 0 8px 25px rgba(255, 0, 150, 0.3);
-  max-width: 600px;
+  text-align: center;
+  box-shadow: 0 8px 25px rgba(255, 0, 100, 0.4);
   width: 90%;
-  backdrop-filter: blur(10px);
-  position: relative;
-  z-index: 2; /* stays above floating emojis */
+  max-width: 800px;
+  z-index: 2;
+  backdrop-filter: blur(12px);
 }
 
 /* Title */
 h1 {
   font-size: 2.5em;
+  margin-bottom: 25px;
+  color: #ffe6f7;
+  text-shadow: 2px 2px 6px rgba(255, 0, 120, 0.7);
+}
+
+/* Controls */
+.controls {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
   margin-bottom: 20px;
-  color: #fff0f5;
-  text-shadow: 2px 2px 5px rgba(255, 0, 150, 0.6);
 }
 
 /* Dropdown */
 select {
   font-size: 18px;
-  padding: 12px 20px;
-  border-radius: 10px;
+  padding: 12px 18px;
+  border-radius: 12px;
   border: none;
-  outline: none;
   background: rgba(255, 255, 255, 0.3);
-  color: #ff66b2;
+  color: #ff4da6;
   font-weight: bold;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 4px 15px rgba(255, 0, 150, 0.3);
-  margin-bottom: 20px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
 }
+select:hover { transform: scale(1.05); }
 
 select option {
   background: #ffe6f2;
@@ -92,45 +92,47 @@ select option {
 
 /* Button */
 button {
-  padding: 10px 20px;
+  padding: 12px 22px;
   border: none;
   border-radius: 12px;
-  background: #ff66b2;
+  background: #ff4da6;
   color: #fff;
   font-size: 18px;
   font-weight: bold;
   cursor: pointer;
-  transition: 0.3s;
+  transition: transform 0.3s, background 0.3s;
 }
-
 button:hover {
-  background: #ff3385;
-  transform: scale(1.05);
+  background: #ff1e80;
+  transform: scale(1.1);
 }
 
 /* Output */
 #output {
-  margin-top: 30px;
+  margin-top: 25px;
   padding: 20px;
   background: rgba(255, 255, 255, 0.15);
-  border-radius: 12px;
-  color: #fff;
+  border-radius: 15px;
   font-size: 1.2em;
+  color: #fff;
+  text-align: left;
   max-height: 400px;
   overflow-y: auto;
-  box-shadow: 0 4px 15px rgba(255, 0, 150, 0.3);
   line-height: 1.6;
-  text-align: left;
+  animation: fadeInBox 0.8s ease;
+}
+@keyframes fadeInBox {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
 }
 
 /* Hug animation */
 .hug-line {
   display: block;
   opacity: 0;
-  animation: fadeIn 0.8s forwards;
+  animation: fadeInLine 0.6s forwards;
 }
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
+@keyframes fadeInLine {
+  from { opacity: 0; transform: translateY(8px); }
   to { opacity: 1; transform: translateY(0); }
 }
