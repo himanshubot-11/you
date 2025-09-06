@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Emoji Love Generator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Floating hearts background -->
+  <div class="hearts"></div>
+
+  <h1>💞 Emoji Love Generator 💞</h1>
+  <p>Select an option and click Generate (it will download a file):</p>
+
+  <select id="choice">
+    <option value="sorry">Sorry</option>
+    <option value="love">Love</option>
+    <option value="kiss">Kiss</option>
+  </select>
+  <button onclick="generateFile()">Generate & Download</button>
+
+  <script>
+    const heartEmojis = ['❤️','💛','💚','💙','💜','🖤','🤍','💖','💗','💓','💞','💕','💘','💝','💟','❣️'];
+    const kissEmojis = ['💋','👩‍❤️‍💋‍👨','👨‍❤️‍💋‍👨','👩‍❤️‍💋‍👩','😘','😗','😚','😙','💏'];
+
+    function getRandomItem(arr) {
+      return arr[Math.floor(Math.random() * arr.length)];
+    }
+
+    function generateFile() {
+      const choice = document.getElementById('choice').value;
+      let text = '';
+
+      for (let i = 0; i < 1000; i++) {
+        if (choice === 'sorry') {
+          text += `Sorry ${getRandomItem(heartEmojis)}\n`;
+        } else if (choice === 'love') {
+          text += `I love you ${getRandomItem(heartEmojis)} ${getRandomItem(kissEmojis)}\n`;
+        } else if (choice === 'kiss') {
+          text += `${getRandomItem(kissEmojis)}\n`;
+        }
+      }
+
+      const blob = new Blob([text], { type: "text/plain" });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = `${choice}_emojis.txt`;
+      link.click();
+    }
+
+    // Generate floating hearts dynamically
+    const heartsContainer = document.querySelector(".hearts");
+    setInterval(() => {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.innerText = getRandomItem(heartEmojis);
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = 3 + Math.random() * 4 + "s"; // 3–7s float
+      heartsContainer.appendChild(heart);
+
+      // Remove heart after animation
+      setTimeout(() => {
+        heart.remove();
+      }, 7000);
+    }, 500);
+  </script>
+
+</body>
+</html>
